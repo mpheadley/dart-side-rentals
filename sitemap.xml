@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Do NOT include 404.html here — it has noindex. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://dartsiderentals.com/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://dartsiderentals.com/privacy.html</loc>
+    <lastmod>2026-03-06</lastmod>
+    <priority>0.3</priority>
+  </url>
+</urlset>

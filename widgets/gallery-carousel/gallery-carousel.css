@@ -1,0 +1,174 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   Gallery Carousel Widget
+   Extracted from RED-Enterprise. Peek/slide style with thumbnail strip.
+   Uses var(--primary) for the accent color — works with any project palette.
+   Link this AFTER your main style.css.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ── Main stage ─────────────────────────────────────────────────────────── */
+.gallery-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius, 4px);
+  margin-top: 48px;
+  height: 420px;
+  user-select: none;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 12px;
+  height: 100%;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ── Slides ──────────────────────────────────────────────────────────────── */
+.gallery-slide {
+  flex: 0 0 auto;
+  height: 100%;
+  overflow: hidden;
+  border-radius: calc(var(--radius, 4px) - 2px);
+  opacity: 0.3;
+  transition: opacity 0.35s ease;
+  position: relative;
+  background: #222;
+  cursor: pointer;
+}
+
+.gallery-slide.active {
+  opacity: 1;
+  cursor: default;
+}
+
+.gallery-slide img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+/* ── Caption bar (gradient overlay, only on active slide) ────────────────── */
+.gallery-caption-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 60px 20px 18px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, transparent 100%);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.82);
+  letter-spacing: 0.03em;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-slide.active .gallery-caption-bar {
+  opacity: 1;
+}
+
+/* ── Slide counter (top center) ──────────────────────────────────────────── */
+.gallery-counter {
+  position: absolute;
+  top: 14px; left: 50%; transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.52);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.72rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ── Prev / Next buttons ─────────────────────────────────────────────────── */
+.gallery-btn {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+  z-index: 3;
+}
+
+.gallery-btn:hover {
+  background: var(--primary, #007bff);
+  border-color: var(--primary, #007bff);
+}
+
+.gallery-prev { left: 16px; }
+.gallery-next { right: 16px; }
+
+/* ── Thumbnail strip ─────────────────────────────────────────────────────── */
+.gallery-thumbs-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.gallery-thumbs {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  flex: 1;
+}
+
+.gallery-thumbs::-webkit-scrollbar { display: none; }
+
+.gallery-thumb {
+  flex: 0 0 auto;
+  width: 58px;
+  height: 44px;
+  border-radius: 3px;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.2s, outline-color 0.2s;
+  outline: 2px solid transparent;
+  outline-offset: 1px;
+}
+
+.gallery-thumb.active {
+  opacity: 1;
+  outline-color: var(--primary, #007bff);
+}
+
+.gallery-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* ── Thumbnail scroll buttons ────────────────────────────────────────────── */
+.gallery-thumb-btn {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.gallery-thumb-btn:hover {
+  background: var(--primary, #007bff);
+  color: #fff;
+  border-color: var(--primary, #007bff);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .gallery-wrap { height: 320px; }
+}
+
+@media (max-width: 600px) {
+  .gallery-wrap { height: 240px; }
+  .gallery-btn  { width: 36px; height: 36px; }
+}
