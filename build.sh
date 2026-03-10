@@ -53,8 +53,9 @@ inject_partial() {
   partial_content=$(<"$partial_file")
 
   # Use awk to replace everything between (and including) the markers
-  awk -v start="$start_marker" -v end="$end_marker" -v content="$partial_content" '
-    $0 ~ start { print start; print content; found=1; next }
+  # Read partial from file to avoid newline-in-string issues with -v
+  awk -v start="$start_marker" -v end="$end_marker" -v pfile="$partial_file" '
+    $0 ~ start { print start; while ((getline line < pfile) > 0) print line; close(pfile); found=1; next }
     found && $0 ~ end { print end; found=0; next }
     !found { print }
   ' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"

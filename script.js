@@ -167,9 +167,6 @@
 
 // ─── Nav scroll behavior ───
 const header = document.getElementById('site-header');
-window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 40);
-}, { passive: true });
 
 // ─── Mobile menu ───
 const mobileOverlay = document.getElementById('mobile-overlay');
@@ -177,24 +174,34 @@ const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileCloseBtn = document.getElementById('mobile-close-btn');
 
 function openMobileMenu() {
+  if (!mobileOverlay) return;
   mobileOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
 function closeMobileMenu() {
+  if (!mobileOverlay) return;
   mobileOverlay.classList.remove('open');
   document.body.style.overflow = '';
 }
 
-mobileMenuBtn.addEventListener('click', openMobileMenu);
-mobileCloseBtn.addEventListener('click', closeMobileMenu);
+if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileMenu);
+if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeMobileMenu);
 
-mobileOverlay.addEventListener('click', (e) => {
-  if (e.target === mobileOverlay) closeMobileMenu();
-});
+if (mobileOverlay) {
+  mobileOverlay.addEventListener('click', (e) => {
+    if (e.target === mobileOverlay) closeMobileMenu();
+  });
+}
 
 document.querySelectorAll('.mobile-nav-link').forEach(link => {
   link.addEventListener('click', closeMobileMenu);
+});
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && mobileOverlay && mobileOverlay.classList.contains('open')) {
+    closeMobileMenu();
+  }
 });
 
 // ─── Scroll-triggered animations ───
@@ -210,12 +217,13 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
 // ─── Scroll spy for homepage anchor links ───
-const navSections = ['hero', 'arsenal', 'how-it-works', 'faq', 'contact'].map(id => ({
-  id,
-  el: document.getElementById(id),
-})).filter(s => s.el);
+const spyLinks = document.querySelectorAll('.desktop-nav a[href^="#"]');
+const navSections = Array.from(spyLinks).map(link => {
+  const id = link.getAttribute('href').slice(1);
+  return { id, el: document.getElementById(id) };
+}).filter(s => s.el);
 
-const navLinks = document.querySelectorAll('.desktop-nav a[href^="#"]');
+const isHomePage = navSections.length > 0;
 
 function updateActiveNav() {
   const scrollY = window.scrollY + 120;
@@ -223,34 +231,36 @@ function updateActiveNav() {
   navSections.forEach(({ id, el }) => {
     if (el.offsetTop <= scrollY) current = id;
   });
-  navLinks.forEach(link => {
+  spyLinks.forEach(link => {
     link.classList.toggle('active', link.getAttribute('href') === '#' + current);
   });
 }
 
-window.addEventListener('scroll', updateActiveNav, { passive: true });
-updateActiveNav();
-
-// ─── Hide scroll cue after user scrolls ───
+// ─── Consolidated scroll handler with rAF throttle ───
 const scrollCue = document.querySelector('.scroll-cue');
-if (scrollCue) {
-  window.addEventListener('scroll', () => {
-    scrollCue.classList.toggle('hidden', window.scrollY > 80);
-  }, { passive: true });
-}
-
-// ─── Sticky mobile CTA — show after scrolling past hero ───
 const stickyCta = document.getElementById('sticky-mobile-cta');
-if (stickyCta) {
-  const heroSection = document.getElementById('hero');
-  const contactSection = document.getElementById('contact');
+const heroSection = document.getElementById('hero');
+const contactSection = document.getElementById('contact');
 
-  window.addEventListener('scroll', () => {
-    const pastHero = heroSection && window.scrollY > heroSection.offsetHeight - 100;
-    const atContact = contactSection && (window.scrollY + window.innerHeight) >= contactSection.offsetTop + 200;
-    stickyCta.classList.toggle('visible', pastHero && !atContact);
-  }, { passive: true });
+let ticking = false;
+function onScroll() {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    const y = window.scrollY;
+    if (header) header.classList.toggle('scrolled', y > 40);
+    if (scrollCue) scrollCue.classList.toggle('hidden', y > 80);
+    if (isHomePage) updateActiveNav();
+    if (stickyCta) {
+      const pastHero = heroSection && y > heroSection.offsetHeight - 100;
+      const atContact = contactSection && (y + window.innerHeight) >= contactSection.offsetTop + 200;
+      stickyCta.classList.toggle('visible', pastHero && !atContact);
+    }
+    ticking = false;
+  });
 }
+window.addEventListener('scroll', onScroll, { passive: true });
+if (isHomePage) updateActiveNav();
 
 // ─── Footer year ───
 var yearEl = document.getElementById('year');
@@ -291,7 +301,39 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     document.head.appendChild(s);
     window.dataLayer = window.dataLayer || [];
     function gtag() { window.dataLayer.push(arguments); }
+    window.gtag = gtag;
     gtag('js', new Date());
     gtag('config', GA4_ID, { anonymize_ip: true });
+
+    // ─── GA4 event tracking (fires only after consent) ───
+    // Phone link clicks
+    document.querySelectorAll('a[href^="tel:"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        gtag('event', 'phone_click', {
+          event_category: 'contact',
+          event_label: link.href.replace('tel:', '')
+        });
+      });
+    });
+
+    // Form submissions
+    document.querySelectorAll('form').forEach(function (form) {
+      form.addEventListener('submit', function () {
+        gtag('event', 'form_submit', {
+          event_category: 'contact',
+          event_label: window.location.pathname
+        });
+      });
+    });
+
+    // CTA button clicks
+    document.querySelectorAll('.btn-primary, .cta-button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        gtag('event', 'cta_click', {
+          event_category: 'engagement',
+          event_label: btn.textContent.trim()
+        });
+      });
+    });
   }
 })();

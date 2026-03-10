@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css?v=21">
+  <link rel="stylesheet" href="style.css?v=22">
   <link rel="stylesheet" href="widgets/gallery-carousel/gallery-carousel.css?v=1">
   <link rel="canonical" href="https://dartsiderentals.com">
   <link rel="icon" href="images/favicon.ico">
@@ -57,7 +57,12 @@
     },
     "areaServed": [
       { "@type": "City", "name": "Oxford", "addressRegion": "AL", "addressCountry": "US" },
-      { "@type": "City", "name": "Anniston", "addressRegion": "AL", "addressCountry": "US" }
+      { "@type": "City", "name": "Anniston", "addressRegion": "AL", "addressCountry": "US" },
+      { "@type": "City", "name": "Jacksonville", "addressRegion": "AL", "addressCountry": "US" },
+      { "@type": "City", "name": "Piedmont", "addressRegion": "AL", "addressCountry": "US" },
+      { "@type": "City", "name": "Heflin", "addressRegion": "AL", "addressCountry": "US" },
+      { "@type": "City", "name": "Lincoln", "addressRegion": "AL", "addressCountry": "US" },
+      { "@type": "AdministrativeArea", "name": "Calhoun County", "addressRegion": "AL", "addressCountry": "US" }
     ],
     "sameAs": ["https://www.facebook.com/profile.php?id=61586506831010"],
     "priceRange": "$$",
@@ -71,7 +76,10 @@
 </head>
 <body>
 
-  <!-- PARTIAL:nav:START -->
+<!-- PARTIAL:nav:START -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ─── Navigation ─── -->
   <header class="site-header" id="site-header">
     <div class="nav-inner container">
       <a class="nav-logo" href="index.html">
@@ -84,7 +92,7 @@
         <a href="#contact" class="btn btn-primary btn-sm">Book Your Party Kit</a>
       </nav>
       <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
           <line x1="3" y1="6" x2="21" y2="6"/>
           <line x1="3" y1="12" x2="21" y2="12"/>
           <line x1="3" y1="18" x2="21" y2="18"/>
@@ -95,7 +103,7 @@
 
   <div class="mobile-overlay" id="mobile-overlay" role="dialog" aria-modal="true" aria-label="Navigation menu">
     <button type="button" class="mobile-close-btn" id="mobile-close-btn" aria-label="Close menu">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
         <line x1="18" y1="6" x2="6" y2="18"/>
         <line x1="6" y1="6" x2="18" y2="18"/>
       </svg>
@@ -107,7 +115,7 @@
       <a href="#contact" class="mobile-nav-link">Book Your Party Kit</a>
     </nav>
   </div>
-  <!-- PARTIAL:nav:END -->
+<!-- PARTIAL:nav:END -->
 
   <!-- ─── Promo Banner ─── -->
   <div class="promo-banner" id="promo-banner">
@@ -118,7 +126,7 @@
     </div>
   </div>
 
-  <main>
+  <main id="main">
 
     <!-- ─── Hero ─── -->
     <section id="hero" class="hero-section">
@@ -468,29 +476,14 @@
             <p class="contact-service-area">Serving Oxford, Anniston &amp; Calhoun County, AL</p>
           </div>
 
-          <!-- Right: contact form -->
-          <form class="contact-form" action="https://formspree.io/f/PLACEHOLDER" method="POST">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" required autocomplete="name">
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required autocomplete="email">
-            </div>
-            <div class="form-group">
-              <label for="date">Event Date</label>
-              <input type="date" id="date" name="event_date">
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="4" placeholder="Tell us about your event — number of kids, location, etc."></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-lg btn-full">
-              Send Message
+          <!-- Right: booking form CTA -->
+          <div class="contact-form-cta">
+            <p class="contact-form-cta-text">Fill out our quick booking form — pick your date, tell us about your event, and we'll confirm your weekend.</p>
+            <a href="https://form.jotform.com/260127675137054" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg btn-full">
+              Book Your Party Kit
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </button>
-          </form>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -518,13 +511,14 @@
     <a href="#contact" class="btn btn-primary btn-lg btn-full">Book Your Party Kit</a>
   </div>
 
-  <!-- PARTIAL:cookie-banner:START -->
+<!-- PARTIAL:cookie-banner:START -->
+  <!-- Cookie Consent Banner -->
   <div class="cookie-banner" id="cookie-banner" data-ga4="NONE">
     <p>We use cookies to analyze site traffic and improve your experience. <a href="privacy.html">Privacy Policy</a></p>
     <button class="cookie-btn cookie-btn-accept">Accept</button>
     <button class="cookie-btn cookie-btn-decline">Decline</button>
   </div>
-  <!-- PARTIAL:cookie-banner:END -->
+<!-- PARTIAL:cookie-banner:END -->
 
   <script src="script.js?v=20"></script>
   <script src="widgets/gallery-carousel/gallery-carousel.js?v=1"></script>
