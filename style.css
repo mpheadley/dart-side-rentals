@@ -1562,7 +1562,7 @@ h1 {
 
 .cookie-btn-decline {
   background: transparent;
-  color: var(--text-muted);
+  color: var(--text-light);
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 

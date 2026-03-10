@@ -31,10 +31,10 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
-  <link rel="stylesheet" href="style.css?v=22">
-  <link rel="stylesheet" href="widgets/gallery-carousel/gallery-carousel.css?v=1">
+  <link rel="stylesheet" href="style.css?v=23">
+  <link rel="stylesheet" href="widgets/gallery-carousel/gallery-carousel.css?v=1" media="print" onload="this.media='all'">
   <link rel="canonical" href="https://dartsiderentals.com">
   <link rel="icon" href="images/favicon.ico">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
@@ -230,7 +230,10 @@
             </div>
           </div>
           <div class="arsenal-photo animate-on-scroll">
-            <img src="images/blaster-collection.webp" alt="Full collection of 30 Nerf blasters included in every rental kit" width="960" height="720" loading="lazy">
+            <img src="images/blaster-collection.webp"
+              srcset="images/blaster-collection-sm.webp 480w, images/blaster-collection.webp 960w"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              alt="Full collection of 30 Nerf blasters included in every rental kit" width="960" height="720" loading="lazy">
             <div class="scan-line"></div>
           </div>
         </div>
@@ -252,40 +255,76 @@
         <div class="gallery-wrap animate-on-scroll" style="--stagger-delay: 0.1s">
           <div class="gallery-track">
             <div class="gallery-slide active">
-              <img src="images/gallery/action-barrier-crouch.webp" alt="Child crouching behind an inflatable barrier with a Nerf blaster" width="600" height="800" loading="lazy">
+              <img src="images/gallery/action-barrier-crouch.webp"
+                srcset="images/gallery/action-barrier-crouch-sm.webp 400w, images/gallery/action-barrier-crouch.webp 600w"
+                sizes="(max-width: 768px) 90vw, 600px"
+                alt="Child crouching behind an inflatable barrier with a Nerf blaster" width="600" height="800" loading="lazy">
             </div>
             <div class="gallery-slide">
-              <img src="images/gallery/action-brick-wall.webp" alt="Child hiding behind a brick-wall inflatable barrier" width="600" height="800" loading="lazy">
+              <img src="images/gallery/action-brick-wall.webp"
+                srcset="images/gallery/action-brick-wall-sm.webp 400w, images/gallery/action-brick-wall.webp 600w"
+                sizes="(max-width: 768px) 90vw, 600px"
+                alt="Child hiding behind a brick-wall inflatable barrier" width="600" height="800" loading="lazy">
             </div>
             <div class="gallery-slide">
-              <img src="images/gallery/action-wide-field.webp" alt="Wide view of a backyard Nerf battlefield with inflatable barriers" width="1200" height="900" loading="lazy">
+              <img src="images/gallery/action-wide-field.webp"
+                srcset="images/gallery/action-wide-field-sm.webp 600w, images/gallery/action-wide-field.webp 1200w"
+                sizes="(max-width: 768px) 90vw, 800px"
+                alt="Wide view of a backyard Nerf battlefield with inflatable barriers" width="1200" height="900" loading="lazy">
             </div>
             <div class="gallery-slide">
-              <img src="images/gallery/action-battle-angle.webp" alt="Kids playing a Nerf battle from behind inflatable cover" width="1200" height="900" loading="lazy">
+              <img src="images/gallery/action-battle-angle.webp"
+                srcset="images/gallery/action-battle-angle-sm.webp 600w, images/gallery/action-battle-angle.webp 1200w"
+                sizes="(max-width: 768px) 90vw, 800px"
+                alt="Kids playing a Nerf battle from behind inflatable cover" width="1200" height="900" loading="lazy">
             </div>
             <div class="gallery-slide">
-              <img src="images/gallery/action-gameplay.webp" alt="Nerf war gameplay with kids spread across the field" width="1200" height="900" loading="lazy">
+              <img src="images/gallery/action-gameplay.webp"
+                srcset="images/gallery/action-gameplay-sm.webp 600w, images/gallery/action-gameplay.webp 1200w"
+                sizes="(max-width: 768px) 90vw, 800px"
+                alt="Nerf war gameplay with kids spread across the field" width="1200" height="900" loading="lazy">
             </div>
             <div class="gallery-slide">
-              <img src="images/gallery/action-team-setup.webp" alt="Kids setting up behind inflatable barriers for a Nerf battle" width="1200" height="900" loading="lazy">
+              <img src="images/gallery/action-team-setup.webp"
+                srcset="images/gallery/action-team-setup-sm.webp 600w, images/gallery/action-team-setup.webp 1200w"
+                sizes="(max-width: 768px) 90vw, 800px"
+                alt="Kids setting up behind inflatable barriers for a Nerf battle" width="1200" height="900" loading="lazy">
             </div>
             <div class="gallery-slide">
-              <img src="images/gallery/action-crouch-barrel.webp" alt="Players crouching behind barrel and crate barriers" width="1200" height="900" loading="lazy">
+              <img src="images/gallery/action-crouch-barrel.webp"
+                srcset="images/gallery/action-crouch-barrel-sm.webp 600w, images/gallery/action-crouch-barrel.webp 1200w"
+                sizes="(max-width: 768px) 90vw, 800px"
+                alt="Players crouching behind barrel and crate barriers" width="1200" height="900" loading="lazy">
             </div>
             <div class="gallery-slide">
-              <img src="images/gallery/action-wide-battle.webp" alt="Wide shot of a Nerf war in progress in a large backyard" width="1200" height="900" loading="lazy">
+              <img src="images/gallery/action-wide-battle.webp"
+                srcset="images/gallery/action-wide-battle-sm.webp 600w, images/gallery/action-wide-battle.webp 1200w"
+                sizes="(max-width: 768px) 90vw, 800px"
+                alt="Wide shot of a Nerf war in progress in a large backyard" width="1200" height="900" loading="lazy">
             </div>
             <div class="gallery-slide">
-              <img src="images/gallery/action-sprint.webp" alt="Player sprinting between inflatable barriers during a Nerf war" width="1200" height="900" loading="lazy">
+              <img src="images/gallery/action-sprint.webp"
+                srcset="images/gallery/action-sprint-sm.webp 600w, images/gallery/action-sprint.webp 1200w"
+                sizes="(max-width: 768px) 90vw, 800px"
+                alt="Player sprinting between inflatable barriers during a Nerf war" width="1200" height="900" loading="lazy">
             </div>
             <div class="gallery-slide">
-              <img src="images/gallery/action-duo-cover.webp" alt="Two players taking cover behind inflatable barriers" width="1200" height="900" loading="lazy">
+              <img src="images/gallery/action-duo-cover.webp"
+                srcset="images/gallery/action-duo-cover-sm.webp 600w, images/gallery/action-duo-cover.webp 1200w"
+                sizes="(max-width: 768px) 90vw, 800px"
+                alt="Two players taking cover behind inflatable barriers" width="1200" height="900" loading="lazy">
             </div>
             <div class="gallery-slide">
-              <img src="images/blaster-collection.webp" alt="Full collection of 30 Nerf blasters laid out on grass" width="960" height="720" loading="lazy">
+              <img src="images/blaster-collection.webp"
+                srcset="images/blaster-collection-sm.webp 480w, images/blaster-collection.webp 960w"
+                sizes="(max-width: 768px) 90vw, 800px"
+                alt="Full collection of 30 Nerf blasters laid out on grass" width="960" height="720" loading="lazy">
             </div>
             <div class="gallery-slide">
-              <img src="images/gallery/blasters-kids.webp" alt="Four kid-friendly Nerf blasters including easy-pull scorpion models" width="960" height="720" loading="lazy">
+              <img src="images/gallery/blasters-kids.webp"
+                srcset="images/gallery/blasters-kids-sm.webp 480w, images/gallery/blasters-kids.webp 960w"
+                sizes="(max-width: 768px) 90vw, 800px"
+                alt="Four kid-friendly Nerf blasters including easy-pull scorpion models" width="960" height="720" loading="lazy">
             </div>
           </div>
 

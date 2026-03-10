@@ -6,7 +6,7 @@
 ---
 
 ## For: Micah Junior — Dart Side Rentals
-## Site: dartsiderentals.com (TBD — confirm domain)
+## Site: https://dartsiderentals.com
 ## Launch Date: ___________
 
 ---
