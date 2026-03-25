@@ -24,3 +24,4 @@ draft-layout.html
 convert-catalog.py
 color-swatches.html
 *.tmp
+.vercel
